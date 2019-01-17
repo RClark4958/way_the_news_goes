@@ -21,5 +21,28 @@ module.exports = {
     .populate("comments")
     .then(result => callback(result))
     .catch(err => console.error(err));
+  },
+  addComment: (id, comment, author, callback) => {
+    Article.updateOne({
+      _id: id
+    }, {
+      $push: {
+        comments: {
+          body: comment,
+          author
+        }
+      }
+    }).then(callback)
+      .catch(err => console.error(err));
+  },
+  deleteComment: (articleId, commentId, callback) => {
+    Article.updateOne({
+      _id: articleId
+    }, {
+      $pull: {
+        comments: { _id: commentId }
+      }
+    }).then(callback)
+      .catch(err => console.error(err));
   }
 }

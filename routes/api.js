@@ -32,4 +32,23 @@ router.get("/comments/:article_id", (req, res) => {
   });
 });
 
+router.post("/comment", (req, res) => {
+  const articleId = req.body.articleId;
+  ArticleController.addComment(
+    articleId,
+    req.body.comment,
+    req.body.name,
+    () => res.redirect(`/api/comments/${articleId}`)
+  );
+});
+
+router.post("/delete-comment", (req, res) => {
+  const articleId = req.body.articleId;
+  ArticleController.deleteComment(
+    articleId,
+    req.body.commentId,
+    () => res.redirect(`/api/comments/${articleId}`)
+  );
+});
+
 module.exports = router;
