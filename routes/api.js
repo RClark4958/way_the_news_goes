@@ -13,7 +13,7 @@ router.get("/scrape", (req, res) => {
 
 router.get("/articles", (req, res) => {
   ArticleController.read(results => {
-    console.log(results);
+    
     res.render("partials/articles", { articles: results, layout: false });
   });
 });
@@ -25,11 +25,10 @@ router.delete("/articles", (req, res) => {
 });
 
 router.get("/comments/:article_id", (req, res) => {
-  const id = req.params.article_id
-  if (!id) res.status(400);
-  ArticleController.findById(id, result => {
-    res.render("partials/modal-body", { article: result, layout: false });
-  });
+  ArticleController.findById(
+    req.params.article_id,
+    result => res.render("partials/modal-body", { article: result, layout: false })
+  );
 });
 
 router.post("/comment", (req, res) => {

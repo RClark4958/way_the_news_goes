@@ -18,7 +18,7 @@ module.exports = {
   },
   findById: (_id, callback) => {
     Article.findOne({ _id })
-    .populate("comments")
+    
     .then(result => callback(result))
     .catch(err => console.error(err));
   },
