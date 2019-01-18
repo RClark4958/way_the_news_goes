@@ -10,5 +10,5 @@
 
 ## Contributors
 
-This project is maintained by Rick Clark. 
+* RClark4958
 
